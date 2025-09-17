@@ -1,0 +1,65 @@
+syntax = "proto3";
+package product;
+
+option go_package = "github.com/ojihalaw/sample-grpc/product-service/proto;productpb";
+
+import "google/api/annotations.proto";
+
+
+message Product {
+  string id = 1;
+  string name = 2;
+  double price = 3;
+}
+
+service ProductService {
+  rpc GetProducts(GetProductsRequest) returns (GetProductsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/products"
+    };
+  }
+  // rpc CreateProduct (CreateProductRequest) returns (ProductResponse);
+  rpc Create(CreateProductRequest) returns (ProductResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/products"
+      body: "*"
+    };
+  }
+}
+
+message CreateProductRequest {
+  string name = 1;
+  string slug = 2;
+  string sku = 3;
+  string variant = 4;
+  int32 price = 5;
+  int32 stock = 6;
+  string description = 7;
+  string image_url = 8;
+  string category_id = 9;
+}
+
+message GetProductsRequest {}
+
+message ProductResponse {
+  string id = 1;
+  string name = 2;
+  string slug = 3;
+  string sku = 4;
+  string variant = 5;
+  int32 price = 6;
+  int32 stock = 7;
+  string description = 8;
+  string image_url = 9;
+  string category_id = 10;
+  string created_at = 11;
+  string updated_at = 12;
+}
+
+message ProductRequest {
+  string id = 1;
+}
+
+message GetProductsResponse {
+  repeated Product products = 1;
+}
