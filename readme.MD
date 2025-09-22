@@ -1,45 +1,91 @@
-/your-project
-│── api-gateway/                 # API Gateway (REST/GraphQL/gRPC-Gateway)
-│   ├── main.go
-│   ├── proto/                   # Proto untuk expose ke frontend
-│   ├── handler/                 # Handler gateway
-│   └── config/
-│
-│── services/                    # Semua microservices
-│   ├── user-service/
-│   │   ├── cmd/
-│   │   │   └── main.go          # entrypoint gRPC server
-│   │   ├── proto/               # .proto untuk user
-│   │   ├── internal/
-│   │   │   ├── handler/         # implementasi gRPC handler
-│   │   │   ├── repository/      # database layer
-│   │   │   ├── service/         # business logic
-│   │   │   └── utils/           # khusus service ini
-│   │   ├── config/
-│   │   └── pb/                  # hasil generate .proto
-│   │
-│   ├── product-service/
-│   │   ├── cmd/main.go
-│   │   ├── proto/
-│   │   ├── internal/{handler,repository,service,utils}
-│   │   └── pb/
-│   │
-│   └── order-service/
-│       ├── cmd/main.go
-│       ├── proto/
-│       ├── internal/{handler,repository,service,utils}
-│       └── pb/
-│
-│── shared/                      # common/shared libs
-│   ├── protos/ 
-        buf.yml                  # proto yg dipakai lintas service (ex: common types)
-│   ├── pb/                      # hasil generate proto shared
-│   ├── utils/                   # util global (logger, config loader, middleware, tracing, etc)
-│   ├── database/                # db connection builder (Postgres, Redis)
-│   ├── events/                  # pubsub/kafka producer-consumer
-│   └── auth/                    # jwt, session, dll
-│
-│── deployments/                 # docker-compose, k8s manifests
-│── Makefile
-│── go.mod
-│── README.md
+# 🛒 Shopping Cart (gRPC + Go + PostgreSQL)
+
+Proyek ini adalah implementasi sederhana dari **Shopping Cart** berbasis **microservices** menggunakan:
+- **Golang** sebagai bahasa utama
+- **gRPC** untuk komunikasi antar service
+- **gRPC-Gateway** sebagai REST + SSE adapter
+- **PostgreSQL** sebagai database
+- **Protobuf** di folder `shared` untuk definisi service & message
+
+---
+
+## Architecture
+![Deskripsi Diagram](shopping-cart-grpc-flowchart.png)
+
+---
+
+## Demo
+![Demo GIF](https://media.giphy.com/media/abc123/giphy.gif)
+
+---
+
+## 📂 Struktur Project
+
+```bash
+.
+├── api-gateway
+│   ├── cmd
+│   ├── go.mod
+│   └── go.sum
+├── order-service
+│   ├── cmd
+│   ├── go.mod
+│   ├── go.sum
+│   └── internal
+├── product-service
+│   ├── cmd
+│   ├── go.mod
+│   ├── go.sum
+│   └── internal
+├── shared
+│   ├── auth
+│   ├── config
+│   ├── database
+│   ├── event
+│   ├── go.mod
+│   ├── go.sum
+│   ├── pb
+│   ├── protos
+│   └── utils
+```
+
+
+---
+
+## 🚀 Service
+
+### 1. Product Service
+- CRUD product
+- Menyimpan data produk ke PostgreSQL
+- gRPC endpoint (contoh):
+  - `CreateProduct`
+  - `GetProduct`
+  - `ListProducts`
+
+### 2. Order Service
+- Membuat order baru
+- Menyimpan order ke PostgreSQL
+- Mendukung **gRPC streaming** untuk update status order (PLACED → PROCESSED → DELIVERED → RECEIVED)
+- gRPC endpoint (contoh):
+  - `CreateOrder`
+  - `StreamOrderStatus` (server streaming)
+
+### 3. Shared
+- `.proto` file untuk **Product** dan **Order**
+- Utilitas common (misalnya helper DB, logger, dsb.)
+
+### 4. API Gateway
+- Menggunakan **gRPC-Gateway** untuk expose REST API di atas gRPC
+- Menyediakan **SSE endpoint** untuk order status:
+```GET /api/orders/stream?order_id=<uuid>```
+
+Contoh response stream:
+```json
+data: {"order_id":"...","status":"PLACED","message":"order PLACED"}
+data: {"order_id":"...","status":"DELIVERED","message":"order DELIVERED"}
+event: completed
+data: stream closed
+```
+
+---
+
