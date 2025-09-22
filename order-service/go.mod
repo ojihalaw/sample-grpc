@@ -1,4 +1,4 @@
-module github.com/ojihalaw/sample-grpc/product-service
+module github.com/ojihalaw/sample-grpc/order-service
 
 go 1.23.3
 

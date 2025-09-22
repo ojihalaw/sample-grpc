@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/ojihalaw/sample-grpc/product-service/internal/config"
+	"github.com/ojihalaw/sample-grpc/order-service/internal/config"
 	configShared "github.com/ojihalaw/sample-grpc/shared/config"
 	utilsShared "github.com/ojihalaw/sample-grpc/shared/utils"
 )

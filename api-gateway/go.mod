@@ -15,6 +15,6 @@ require (
 	google.golang.org/protobuf v1.36.9 // indirect
 )
 
-require github.com/ojihalaw/sample-grpc/product-service v0.0.0
+require github.com/ojihalaw/sample-grpc/shared v0.0.0
 
-replace github.com/ojihalaw/sample-grpc/product-service => ../product-service
+replace github.com/ojihalaw/sample-grpc/shared => ../shared

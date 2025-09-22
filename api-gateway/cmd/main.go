@@ -9,7 +9,8 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
-	productpb "github.com/ojihalaw/sample-grpc/product-service/proto/product"
+	orderpb "github.com/ojihalaw/sample-grpc/shared/pb/order"
+	productpb "github.com/ojihalaw/sample-grpc/shared/pb/product"
 )
 
 func main() {
@@ -20,9 +21,18 @@ func main() {
 	mux := runtime.NewServeMux()
 	opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
 
-	err := productpb.RegisterProductServiceHandlerFromEndpoint(ctx, mux, "localhost:50052", opts)
-	if err != nil {
-		log.Fatalf("failed to start HTTP gateway: %v", err)
+	// 🔹 Register ProductService
+	if err := productpb.RegisterProductServiceHandlerFromEndpoint(
+		ctx, mux, "localhost:50052", opts,
+	); err != nil {
+		log.Fatalf("failed to register ProductService: %v", err)
+	}
+
+	// 🔹 Register OrderService
+	if err := orderpb.RegisterOrderServiceHandlerFromEndpoint(
+		ctx, mux, "localhost:50053", opts,
+	); err != nil {
+		log.Fatalf("failed to register OrderService: %v", err)
 	}
 
 	log.Println("🌐 API Gateway running at :8080")

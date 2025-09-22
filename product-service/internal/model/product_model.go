@@ -3,18 +3,20 @@ package model
 import "github.com/google/uuid"
 
 type ProductResponse struct {
-	ID          string    `json:"id,omitempty"`
-	Name        string    `json:"name,omitempty"`
-	Slug        string    `json:"slug"`
-	SKU         string    `json:"sku"`
-	Variant     string    `json:"variant"`
-	Price       int       `json:"price"`
-	Stock       int       `json:"stock"`
-	Description string    `json:"description"`
-	ImageURL    string    `json:"image_url"`
-	CategoryID  uuid.UUID `json:"category_id"`
-	CreatedAt   string    `json:"created_at,omitempty"`
-	UpdatedAt   string    `json:"updated_at,omitempty"`
+	ID           string    `json:"id,omitempty"`
+	Name         string    `json:"name,omitempty"`
+	Slug         string    `json:"slug"`
+	SKU          string    `json:"sku"`
+	Variant      string    `json:"variant"`
+	Price        int       `json:"price"`
+	Stock        int       `json:"stock"`
+	Description  string    `json:"description"`
+	ImageURL     string    `json:"image_url"`
+	Star         float64   `json:"star"`
+	CategoryID   uuid.UUID `json:"category_id"`
+	CategoryName string    `json:"category_name"`
+	CreatedAt    string    `json:"created_at,omitempty"`
+	UpdatedAt    string    `json:"updated_at,omitempty"`
 }
 
 type CreateProductRequest struct {
@@ -27,6 +29,7 @@ type CreateProductRequest struct {
 	Description string    `json:"description" validate:"required"`
 	ImageURL    string    `json:"image_url"`
 	CategoryID  uuid.UUID `json:"category_id" validate:"required"`
+	Star        float64   `json:"star"`
 }
 
 type UpdateProductRequest struct {

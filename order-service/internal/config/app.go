@@ -6,10 +6,10 @@ import (
 	"net"
 
 	"github.com/cloudinary/cloudinary-go/v2"
-	controller "github.com/ojihalaw/sample-grpc/product-service/internal/delivery/grpc"
-	"github.com/ojihalaw/sample-grpc/product-service/internal/repository"
-	"github.com/ojihalaw/sample-grpc/product-service/internal/usecase"
-	productpb "github.com/ojihalaw/sample-grpc/shared/pb/product"
+	controller "github.com/ojihalaw/sample-grpc/order-service/internal/delivery/grpc"
+	"github.com/ojihalaw/sample-grpc/order-service/internal/repository"
+	"github.com/ojihalaw/sample-grpc/order-service/internal/usecase"
+	orderPb "github.com/ojihalaw/sample-grpc/shared/pb/order"
 	utilsShared "github.com/ojihalaw/sample-grpc/shared/utils"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -26,9 +26,9 @@ type BootstrapConfig struct {
 }
 
 func BootstrapGRPC(config *BootstrapConfig) {
-	productRepository := repository.NewProductRepository(config.Log)
-	productUsecase := usecase.NewProductUseCase(config.DB, config.Log, config.Validator, config.Cloudinary, productRepository)
-	productController := controller.NewProductController(productUsecase, config.Log)
+	orderRepository := repository.NewOrderRepository(config.Log)
+	orderUsecase := usecase.NewOrderUseCase(config.DB, config.Log, config.Validator, config.Cloudinary, orderRepository)
+	orderController := controller.NewOrderController(orderUsecase, config.Log)
 
 	port := config.Config.GetInt("APP_PORT")
 
@@ -38,12 +38,12 @@ func BootstrapGRPC(config *BootstrapConfig) {
 	}
 
 	grpcServer := grpc.NewServer()
-	productpb.RegisterProductServiceServer(
+	orderPb.RegisterOrderServiceServer(
 		grpcServer,
-		productController,
+		orderController,
 	)
-
-	config.Log.Println("✅ Product service running at :50052")
+	message := fmt.Sprintf("✅ Order service running at : %d", port)
+	config.Log.Println(message)
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
