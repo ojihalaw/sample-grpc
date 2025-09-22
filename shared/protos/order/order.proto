@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package order;
 
-option go_package = "github.com/ojihalaw/sample-grpc/shared/pb/order;orderpb";
+option go_package = "github.com/ojihalaw/shopping-cart-go-grpc/shared/pb/order;orderpb";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 

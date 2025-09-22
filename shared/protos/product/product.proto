@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package product;
 
-option go_package = "github.com/ojihalaw/sample-grpc/shared/pb/product;productpb";
+option go_package = "github.com/ojihalaw/shopping-cart-go-grpc/shared/pb/product;productpb";
 import "google/api/annotations.proto";
 
 // Pagination info

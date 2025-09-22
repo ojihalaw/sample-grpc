@@ -1,8 +1,8 @@
 package converter
 
 import (
-	"github.com/ojihalaw/sample-grpc/product-service/internal/entity"
-	"github.com/ojihalaw/sample-grpc/product-service/internal/model"
+	"github.com/ojihalaw/shopping-cart-go-grpc/product-service/internal/entity"
+	"github.com/ojihalaw/shopping-cart-go-grpc/product-service/internal/model"
 )
 
 func ProductToResponse(product *entity.Product) *model.ProductResponse {

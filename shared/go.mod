@@ -1,4 +1,4 @@
-module github.com/ojihalaw/sample-grpc/shared
+module github.com/ojihalaw/shopping-cart-go-grpc/shared
 
 go 1.23.3
 

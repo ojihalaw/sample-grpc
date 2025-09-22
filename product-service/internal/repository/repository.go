@@ -3,7 +3,7 @@ package repository
 import (
 	"strings"
 
-	utilsShared "github.com/ojihalaw/sample-grpc/shared/utils"
+	utilsShared "github.com/ojihalaw/shopping-cart-go-grpc/shared/utils"
 	"gorm.io/gorm"
 )
 

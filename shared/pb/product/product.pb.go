@@ -7,12 +7,13 @@
 package productpb
 
 import (
-	_ "google.golang.org/genproto/googleapis/api/annotations"
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
+
+	_ "google.golang.org/genproto/googleapis/api/annotations"
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -995,7 +996,7 @@ const file_product_product_proto_rawDesc = "" +
 	"\x06Create\x12\x1d.product.CreateProductRequest\x1a\x1f.product.DefaultSuccessResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/v1/products\x12c\n" +
 	"\bFindById\x12\x1e.product.GetProductByIDRequest\x1a\x18.product.SuccessResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/v1/products/{id}\x12d\n" +
 	"\x06Update\x12\x1e.product.GetProductByIDRequest\x1a\x18.product.SuccessResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\x1a\x15/api/v1/products/{id}\x12a\n" +
-	"\x06Delete\x12\x1e.product.GetProductByIDRequest\x1a\x18.product.SuccessResponse\"\x1d\x82\xd3\xe4\x93\x02\x17*\x15/api/v1/products/{id}B=Z;github.com/ojihalaw/sample-grpc/shared/pb/product;productpbb\x06proto3"
+	"\x06Delete\x12\x1e.product.GetProductByIDRequest\x1a\x18.product.SuccessResponse\"\x1d\x82\xd3\xe4\x93\x02\x17*\x15/api/v1/products/{id}B=Z;github.com/ojihalaw/shopping-cart-go-grpc/shared/pb/product;productpbb\x06proto3"
 
 var (
 	file_product_product_proto_rawDescOnce sync.Once

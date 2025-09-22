@@ -7,10 +7,10 @@ import (
 
 	"github.com/cloudinary/cloudinary-go/v2"
 	"github.com/go-playground/validator/v10"
-	"github.com/ojihalaw/sample-grpc/order-service/internal/entity"
-	"github.com/ojihalaw/sample-grpc/order-service/internal/model"
-	"github.com/ojihalaw/sample-grpc/order-service/internal/repository"
-	utilsShared "github.com/ojihalaw/sample-grpc/shared/utils"
+	"github.com/ojihalaw/shopping-cart-go-grpc/order-service/internal/entity"
+	"github.com/ojihalaw/shopping-cart-go-grpc/order-service/internal/model"
+	"github.com/ojihalaw/shopping-cart-go-grpc/order-service/internal/repository"
+	utilsShared "github.com/ojihalaw/shopping-cart-go-grpc/shared/utils"
 	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
 )

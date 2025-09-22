@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ojihalaw/sample-grpc/order-service/internal/model"
-	"github.com/ojihalaw/sample-grpc/order-service/internal/usecase"
-	orderPb "github.com/ojihalaw/sample-grpc/shared/pb/order"
+	"github.com/ojihalaw/shopping-cart-go-grpc/order-service/internal/model"
+	"github.com/ojihalaw/shopping-cart-go-grpc/order-service/internal/usecase"
+	orderPb "github.com/ojihalaw/shopping-cart-go-grpc/shared/pb/order"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	// productpb "github.com/ojihalaw/sample-grpc/shared/pb/product"
+	// productpb "github.com/ojihalaw/shopping-cart-go-grpc/shared/pb/product"
 	"github.com/sirupsen/logrus"
 )
 

@@ -7,13 +7,14 @@
 package orderpb
 
 import (
+	reflect "reflect"
+	sync "sync"
+	unsafe "unsafe"
+
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
-	reflect "reflect"
-	sync "sync"
-	unsafe "unsafe"
 )
 
 const (
@@ -950,7 +951,7 @@ const file_order_order_proto_rawDesc = "" +
 	"\amessage\x18\x03 \x01(\tR\amessage2\xe5\x01\n" +
 	"\fOrderService\x12V\n" +
 	"\x06Create\x12\x19.order.CreateOrderRequest\x1a\x16.order.SuccessResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/api/v1/orders\x12}\n" +
-	"\x11StreamOrderStatus\x12\x19.order.OrderStatusRequest\x1a\x1a.order.OrderStatusResponse\"/\x82\xd3\xe4\x93\x02)\x12'/api/v1/orders/{order_id}/status/stream0\x01B9Z7github.com/ojihalaw/sample-grpc/shared/pb/order;orderpbb\x06proto3"
+	"\x11StreamOrderStatus\x12\x19.order.OrderStatusRequest\x1a\x1a.order.OrderStatusResponse\"/\x82\xd3\xe4\x93\x02)\x12'/api/v1/orders/{order_id}/status/stream0\x01B9Z7github.com/ojihalaw/shopping-cart-go-grpc/shared/pb/order;orderpbb\x06proto3"
 
 var (
 	file_order_order_proto_rawDescOnce sync.Once

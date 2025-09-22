@@ -1,17 +1,17 @@
-module github.com/ojihalaw/sample-grpc/product-service
+module github.com/ojihalaw/shopping-cart-go-grpc/product-service
 
 go 1.23.3
 
 require (
 	github.com/go-playground/validator/v10 v10.27.0
 	github.com/google/uuid v1.6.0
-	github.com/ojihalaw/sample-grpc/shared v0.0.0
+	github.com/ojihalaw/shopping-cart-go-grpc/shared v0.0.0
 	github.com/spf13/viper v1.21.0
 	google.golang.org/grpc v1.75.1
 	gorm.io/gorm v1.31.0
 )
 
-replace github.com/ojihalaw/sample-grpc/shared => ../shared
+replace github.com/ojihalaw/shopping-cart-go-grpc/shared => ../shared
 
 require (
 	github.com/creasty/defaults v1.7.0 // indirect

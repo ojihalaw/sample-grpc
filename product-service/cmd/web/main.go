@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/ojihalaw/sample-grpc/product-service/internal/config"
-	configShared "github.com/ojihalaw/sample-grpc/shared/config"
-	utilsShared "github.com/ojihalaw/sample-grpc/shared/utils"
+	"github.com/ojihalaw/shopping-cart-go-grpc/product-service/internal/config"
+	configShared "github.com/ojihalaw/shopping-cart-go-grpc/shared/config"
+	utilsShared "github.com/ojihalaw/shopping-cart-go-grpc/shared/utils"
 )
 
 func main() {

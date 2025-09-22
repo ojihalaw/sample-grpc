@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 
-	"github.com/ojihalaw/sample-grpc/order-service/internal/entity"
+	"github.com/ojihalaw/shopping-cart-go-grpc/order-service/internal/entity"
 	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
 )
