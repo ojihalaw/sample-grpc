@@ -15,6 +15,9 @@ require (
 	google.golang.org/protobuf v1.36.9 // indirect
 )
 
-require github.com/ojihalaw/sample-grpc/shared v0.0.0
+require (
+	github.com/ojihalaw/sample-grpc/shared v0.0.0
+	github.com/rs/cors v1.11.1
+)
 
 replace github.com/ojihalaw/sample-grpc/shared => ../shared
