@@ -1,4 +1,4 @@
-module github.com/ojihalaw/sample-grpc/api-gateway
+module github.com/ojihalaw/shopping-cart-go-grpc/api-gateway
 
 go 1.23.3
 
@@ -16,8 +16,8 @@ require (
 )
 
 require (
-	github.com/ojihalaw/sample-grpc/shared v0.0.0
+	github.com/ojihalaw/shopping-cart-go-grpc/shared v0.0.0
 	github.com/rs/cors v1.11.1
 )
 
-replace github.com/ojihalaw/sample-grpc/shared => ../shared
+replace github.com/ojihalaw/shopping-cart-go-grpc/shared => ../shared

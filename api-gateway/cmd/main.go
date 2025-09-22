@@ -13,8 +13,8 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
-	orderpb "github.com/ojihalaw/sample-grpc/shared/pb/order"
-	productpb "github.com/ojihalaw/sample-grpc/shared/pb/product"
+	orderpb "github.com/ojihalaw/shopping-cart-go-grpc/shared/pb/order"
+	productpb "github.com/ojihalaw/shopping-cart-go-grpc/shared/pb/product"
 )
 
 func main() {
