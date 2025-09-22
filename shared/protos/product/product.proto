@@ -1,0 +1,134 @@
+syntax = "proto3";
+
+package product;
+
+option go_package = "github.com/ojihalaw/sample-grpc/shared/pb/product;productpb";
+import "google/api/annotations.proto";
+
+// Pagination info
+message Pagination {
+  int32 page = 1;
+  int32 limit = 2;
+  int32 total = 3;
+}
+
+// Product
+message Product {
+  string id = 1;
+  string name = 2;
+  string slug = 3;
+  string sku = 4;
+  string variant = 5;
+  int32 price = 6;
+  int32 stock = 7;
+  string description = 8;
+  double star = 9;
+  string image_url = 10;
+  string category_id = 11;
+  string category_name = 12; // biar relasi kebaca langsung kalau perlu
+  string created_at = 15; // biasanya pakai ISO8601 format string
+  string updated_at = 16;
+}
+
+// Request
+message GetProductsRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  string search = 3;
+  string order_by = 4;
+  string sort_by = 5;
+}
+
+message GetProductByIDRequest {
+  string id = 1;
+}
+
+message CreateProductRequest {
+  string name = 1;
+  string variant = 2;
+  int32 price = 3;
+  int32 stock = 4;
+  double star = 5;
+  string description = 6;
+  string category_id = 7;
+}
+
+// Responses
+message ProductResponse {
+  string id = 1;
+  string name = 2;
+  string slug = 3;
+  string sku = 4;
+  string variant = 5;
+  int32 price = 6;
+  int32 stock = 7;
+  string description = 8;
+  double star = 9;
+  string image_url = 10;
+  string category_id = 11;
+  string category_name = 12; // biar relasi kebaca langsung kalau perlu
+  string created_at = 15; // biasanya pakai ISO8601 format string
+  string updated_at = 16;
+}
+
+message GetProductsResponse {
+  repeated ProductResponse products = 1;
+}
+
+message SuccessResponseWithPagination {
+  int32 code = 1;
+  bool status = 2;
+  string message = 3;
+  GetProductsResponse result = 4; // langsung typed
+  Pagination pagination = 5;
+}
+
+message DefaultSuccessResponse {
+  int32 code = 1;
+  bool status = 2;
+  string message = 3;
+}
+
+message SuccessResponse {
+  int32 code = 1;
+  bool status = 2;
+  string message = 3;
+  ProductResponse result = 4;
+}
+
+message ErrorResponse {
+  int32 code = 1;
+  bool status = 2;
+  string message = 3;
+}
+
+// Service
+service ProductService {
+  rpc GetProducts(GetProductsRequest) returns (SuccessResponseWithPagination) {
+    option (google.api.http) = { 
+      get: "/api/v1/products" };
+  }
+  rpc Create(CreateProductRequest) returns (DefaultSuccessResponse) {
+    option (google.api.http) = { 
+      post: "/api/v1/products",
+      body: "*" 
+    };
+  }
+  rpc FindById(GetProductByIDRequest) returns (SuccessResponse) {
+    option (google.api.http) = { 
+      get: "/api/v1/products/{id}"
+    };
+  }
+  rpc Update(GetProductByIDRequest) returns (SuccessResponse) {
+    option (google.api.http) = { 
+      put: "/api/v1/products/{id}",
+      body: "*" 
+    };
+  }
+  
+  rpc Delete(GetProductByIDRequest) returns (SuccessResponse) {
+    option (google.api.http) = { 
+      delete: "/api/v1/products/{id}"
+    };
+  }
+}

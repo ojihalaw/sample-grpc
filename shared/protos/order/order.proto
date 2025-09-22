@@ -1,0 +1,147 @@
+syntax = "proto3";
+
+package order;
+
+option go_package = "github.com/ojihalaw/sample-grpc/shared/pb/order;orderpb";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+
+// Pagination info
+message Pagination {
+  int32 page = 1;
+  int32 limit = 2;
+  int32 total = 3;
+}
+
+// Order
+message OrderItem {
+  string id = 1;                // UUID
+  string order_id = 2;          // UUID
+  string product_id = 3;        // UUID
+  string product_name = 4;      // snapshot nama product
+  int32 qty = 5;                
+  int64 price = 6;              // harga per unit
+  int64 subtotal = 7;           // qty * price
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+message Order {
+  string id = 1;                
+  string user_id = 2;           
+  string invoice_number = 3;    
+  string status = 4;            // pending, paid, failed, expired
+  int64 amount = 5;             
+  string payment_method = 6;    
+  string payment_type = 7;      
+  string transaction_id = 8;    
+  string redirect_url = 9;      
+  google.protobuf.Timestamp expired_at = 10;
+  string notes = 11;
+  string shipping_addr = 12;
+  repeated OrderItem order_items = 13;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp updated_at = 15;
+}
+
+// Request
+// Order Item Request
+message OrderItemRequest {
+  string product_id = 1;   // UUID
+  string name = 2;         // nama produk snapshot
+  int64 price = 3;         // harga per unit
+  int32 quantity = 4;      // jumlah order
+}
+
+message OrderStatusRequest {
+  string order_id = 1;
+}
+
+message OrderStatusResponse {
+  string order_id = 1;
+  string status = 2; // PLACED, PROCESSED, DELIVERED, RECEIVED
+  string message = 3;
+  string updated_at = 4;
+}
+// Create Order Request
+message CreateOrderRequest {
+  string customer_id = 1;     
+  string customer_name = 2;   
+  string customer_email = 3;  
+  string customer_phone = 4;  
+
+  repeated OrderItemRequest items = 5;  
+
+  string notes = 6;           
+  string payment_method = 7;  
+  string shipping_address = 8;
+}
+
+// Responses
+message OrderResponse {
+  string id = 1;                
+}
+// message SuccessResponseWithPagination {
+//   int32 code = 1;
+//   bool status = 2;
+//   string message = 3;
+//   GetProductsResponse result = 4; // langsung typed
+//   Pagination pagination = 5;
+// }
+
+message DefaultSuccessResponse {
+  int32 code = 1;
+  bool status = 2;
+  string message = 3;
+}
+
+message SuccessResponse {
+  int32 code = 1;
+  bool status = 2;
+  string message = 3;
+  OrderResponse result = 4;
+}
+
+message ErrorResponse {
+  int32 code = 1;
+  bool status = 2;
+  string message = 3;
+}
+
+// Service
+service OrderService {
+  // rpc GetProducts(GetProductsRequest) returns (SuccessResponseWithPagination) {
+  //   option (google.api.http) = { 
+  //     get: "/api/v1/products" };
+  // }
+  rpc Create(CreateOrderRequest) returns (SuccessResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/orders"
+      body: "*"
+    };
+  }
+  rpc StreamOrderStatus(OrderStatusRequest) returns (stream OrderStatusResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/orders/{order_id}/status/stream"
+    };
+  };
+
+  // rpc FindById(GetProductByIDRequest) returns (SuccessResponse) {
+  //   option (google.api.http) = { 
+  //     get: "/api/v1/products/{id}"
+  //   };
+  // }
+  // rpc Update(GetProductByIDRequest) returns (SuccessResponse) {
+  //   option (google.api.http) = { 
+  //     put: "/api/v1/products/{id}",
+  //     body: "*" 
+  //   };
+  // }
+  
+  // rpc Delete(GetProductByIDRequest) returns (SuccessResponse) {
+  //   option (google.api.http) = { 
+  //     delete: "/api/v1/products/{id}"
+  //   };
+  // }
+}
