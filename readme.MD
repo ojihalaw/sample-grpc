@@ -15,7 +15,7 @@ Proyek ini adalah implementasi sederhana dari **Shopping Cart** berbasis **micro
 ---
 
 ## Demo
-![Demo GIF](https://media.giphy.com/media/abc123/giphy.gif)
+![Demo GIF](shopping-cart-grpc-demo.gif)
 
 ---
 
@@ -80,7 +80,7 @@ Proyek ini adalah implementasi sederhana dari **Shopping Cart** berbasis **micro
 ```GET /api/orders/stream?order_id=<uuid>```
 
 Contoh response stream:
-```json
+```bash
 data: {"order_id":"...","status":"PLACED","message":"order PLACED"}
 data: {"order_id":"...","status":"DELIVERED","message":"order DELIVERED"}
 event: completed
